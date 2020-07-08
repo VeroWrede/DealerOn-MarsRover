@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Mars_Rover
 {
@@ -38,9 +39,25 @@ namespace Mars_Rover
             // get turning instructions
             Console.WriteLine("Please enter movement instructions:");
             var instructionInput = Console.ReadLine();
+            bool validInstructions = CheckInstructions(instructionInput);
+
+        }
+
+        static bool CheckInstructions(string instructionsInput)
+        {
             List<string> instructionOptions = new List<string>() {"L", "R", "M"};
             List<string> instructions = new List<string>();
-            
+            for (int i = 0; i < instructionsInput.Length; i++)
+            {
+                string letterToUpper = Char.ToString(instructionsInput[i]).ToUpper();
+                if (!instructionOptions.Contains(letterToUpper))
+                {
+                    Console.WriteLine("Invalid instructions.");
+                    return false;
+                }
+            }
+            return true;
+
 
         }
 
