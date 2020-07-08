@@ -1,0 +1,11 @@
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\Mars Rover.deps.json
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\Mars Rover.runtimeconfig.json
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\Mars Rover.runtimeconfig.dev.json
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\Mars Rover.dll
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\Mars Rover.pdb
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.csprojAssemblyReference.cache
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.csproj.CoreCompileInputs.cache
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.AssemblyInfoInputs.cache
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.AssemblyInfo.cs
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.dll
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.pdb
