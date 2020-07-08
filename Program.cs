@@ -22,8 +22,10 @@ namespace Mars_Rover
         {
             Console.WriteLine("Enter bounds of grid you'd like to explore:");
             var userInput = Console.ReadLine();
+            int inputCount = 0;
             foreach (string bound in userInput.Trim().Split(' '))
             {
+                inputCount ++;
                 try
                 {
                     int.Parse(bound);
@@ -34,8 +36,13 @@ namespace Mars_Rover
                     return false;
                 }
             }
+            if (inputCount != 2)
+            {
+                Console.WriteLine("Please enter only two Coordinates \n");
+                return false;
+            }
 
-            
+
             return true;
         }
     }
