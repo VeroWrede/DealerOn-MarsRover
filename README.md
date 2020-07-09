@@ -19,3 +19,13 @@ spot), while M instructs the rover to move forward one grid point along its curr
 Your task is write an application that takes the test input (instructions from NASA) and provides the expected
 output (the feedback from the rovers to NASA). Each rover will move in series, i.e. the next rover will not start
 moving until the one preceding it finishes.
+
+
+Design Explanantion 
+
+Main focus was on verifying if the user input is correct. 
+Idealy, with more time I'd like to put all helper methods in a different file and only have Main() in Program.cs,
+see if speed or memory allocation can be improved and make the code shorter in a few places, especially in the SingleRoverInstruction()method.
+I wasn't sure if they program should run for two rovers evereytime but I'd like to offer the user to chose how many rovers she/he'd like to deploy.
+
+
