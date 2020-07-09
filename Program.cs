@@ -8,8 +8,17 @@ namespace Mars_Rover
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Welcome on Mars!");
+            for (int i = 0; i < 2; i++)
+            {
+                SingleRoverInstruction();
+            }
+        }
+
+        static void SingleRoverInstruction()
+        {
             //get grid size
-            Console.WriteLine("Welcome on Mars!\nEnter Grid bounds:");
+            Console.WriteLine("Enter Grid bounds:");
             var userInput = Console.ReadLine();
             bool validInput = CheckUserInput(userInput);
             if (!validInput)
@@ -63,8 +72,6 @@ namespace Mars_Rover
                 // instruction is to move
                 if(Char.ToString(instructionInput[i]) == "M")
                 {
-                    Console.WriteLine("move");
-                    Console.WriteLine($"orientation {startingCoordinates[2]}");
                     //rover looks north (up)
                     if((startingCoordinates[2].ToUpper()) == "N")
                     {
@@ -72,6 +79,7 @@ namespace Mars_Rover
                         if(roverPosition[1] > gridBorders[1])
                         {
                             Console.WriteLine("Rover left surveilance grid.");
+                            return;
                         }
                     }
                     else if ((startingCoordinates[2].ToUpper()) == "S")
@@ -89,12 +97,12 @@ namespace Mars_Rover
                         if(roverPosition[0] > gridBorders[0])
                         {
                             Console.WriteLine("Rover left surveilance grid.");
+                            return;
                         }
                     }
                     else if ((startingCoordinates[2].ToUpper()) == "W")
                     {
                         roverPosition[0] = roverPosition[0] - 1;
-                        Console.WriteLine($"here {roverPosition[0]}");
                         if (roverPosition[0] < 0)
                         {
                             Console.WriteLine("rover left surveilance grid.");
@@ -105,8 +113,6 @@ namespace Mars_Rover
                 // intruction to turn right
                 if (Char.ToString(instructionInput[i]) == "R")
                 {
-                    Console.WriteLine("rigt");
-
                     if ((startingCoordinates[2].ToUpper()) == "N")
                     {
                         startingCoordinates[2] = "E";
@@ -127,14 +133,9 @@ namespace Mars_Rover
                 // instruction to turn left
                 if (Char.ToString(instructionInput[i]) == "L")
                 {
-                    Console.WriteLine("left");
-                    
-
                     if ((startingCoordinates[2].ToUpper()) == "N")
                     {
-                        Console.WriteLine("facing north");
                         startingCoordinates[2] = "W";
-                        Console.WriteLine($"orientation in left {startingCoordinates[2].ToUpper()}");
                     }
                     else if ((startingCoordinates[2].ToUpper()) == "E")
                     {
@@ -151,9 +152,11 @@ namespace Mars_Rover
                 }
             }
             
-            Console.WriteLine($"rover position x: {roverPosition[0]}");
+            /*Console.WriteLine($"rover position x: {roverPosition[0]}");
             Console.WriteLine($"rover position y: {roverPosition[1]}");
             Console.WriteLine($"rover orientation: {startingCoordinates[2]}");
+            */
+            Console.WriteLine($"{roverPosition[0]} {roverPosition[1]} {startingCoordinates[2]}");
 
         }
 
