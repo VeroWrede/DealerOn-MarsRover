@@ -9,10 +9,28 @@ namespace Mars_Rover
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome on Mars!");
-            for (int i = 0; i < 2; i++)
+            // this is optional
+            int numOfRovers = RoverNumber();
+            for (int i = 0; i < numOfRovers; i++)
             {
                 SingleRoverInstruction();
             }
+        }
+
+        static int RoverNumber()
+        {
+            Console.WriteLine("How many rovers would you like to deploy?");
+            var rovers = Console.ReadLine();
+            try
+            {
+               int.Parse(rovers);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Please enter a numeric value.");
+                return 0;
+            }
+            return int.Parse(rovers);
         }
 
         static void SingleRoverInstruction()
