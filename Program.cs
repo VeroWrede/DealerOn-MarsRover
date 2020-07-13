@@ -9,12 +9,27 @@ namespace Mars_Rover
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome on Mars!");
+            //get grid size, must be in main if all rovers are to deploy in the same grid
+            Console.WriteLine("Enter Grid bounds:");
+            var userInput = Console.ReadLine();
+            bool validInput = CheckUserInput(userInput);
+            if (!validInput)
+            {
+                return;
+            }
+            List<int> gridCoordinates = new List<int>();
+            foreach(string coordinate in userInput.Trim().Split(' '))
+            {
+                gridCoordinates.Add(int.Parse(coordinate));
+            }
+
             // this is optional
             int numOfRovers = RoverNumber();
             for (int i = 0; i < numOfRovers; i++)
             {
-                SingleRoverInstruction();
+                SingleRoverInstruction(gridCoordinates, userInput);
             }
+
         }
 
         static int RoverNumber()
@@ -33,21 +48,9 @@ namespace Mars_Rover
             return int.Parse(rovers);
         }
 
-        static void SingleRoverInstruction()
+        static void SingleRoverInstruction(List<int> gridCoordinates, string userInput)
         {
-            //get grid size
-            Console.WriteLine("Enter Grid bounds:");
-            var userInput = Console.ReadLine();
-            bool validInput = CheckUserInput(userInput);
-            if (!validInput)
-            {
-                return;
-            }
-            List<int> gridCoordinates = new List<int>();
-            foreach(string coordinate in userInput.Trim().Split(' '))
-            {
-                gridCoordinates.Add(int.Parse(coordinate));
-            }
+            
             
             // get rover starting point
             Console.WriteLine("Please enter the rovers starting point:");
@@ -72,12 +75,6 @@ namespace Mars_Rover
                 return;
             }
             
-            // grid coordinates
-            List<int> gridBorders = new List<int>();
-            foreach (string bound in userInput.Trim().Split(' '))
-            {
-                gridBorders.Add(int.Parse(bound));
-            }
             // starting point already set as List<string> startingCoordinates
 
             List<int> roverPosition = new List<int>() {int.Parse(startingCoordinates[0]), int.Parse(startingCoordinates[1])};
@@ -94,7 +91,7 @@ namespace Mars_Rover
                     if((startingCoordinates[2].ToUpper()) == "N")
                     {
                         roverPosition[1] = roverPosition[1] + 1;
-                        if(roverPosition[1] > gridBorders[1])
+                        if(roverPosition[1] > gridCoordinates[1])
                         {
                             Console.WriteLine("Rover left surveilance grid.");
                             return;
@@ -112,7 +109,7 @@ namespace Mars_Rover
                     else if ((startingCoordinates[2].ToUpper()) == "E")
                     {
                         roverPosition[0] = roverPosition[0] + 1;
-                        if(roverPosition[0] > gridBorders[0])
+                        if(roverPosition[0] > gridCoordinates[0])
                         {
                             Console.WriteLine("Rover left surveilance grid.");
                             return;

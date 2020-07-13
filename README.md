@@ -27,6 +27,6 @@ Main focus was on verifying if the user input is correct.
 Idealy, with more time I'd like to put all helper methods in a different file and only have Main() in Program.cs,
 see if speed or memory allocation can be improved, write some tests,
 and make the code shorter in a few places, especially in the SingleRoverInstruction()method.
-I wasn't sure if they program should run for two rovers evereytime but I'd like to offer the user to chose how many rovers she/he'd like to deploy.
+I wasn't sure if they program should run for two rovers evereytime but I like to offer the user to chose how many rovers she/he'd like to deploy.
 
 
