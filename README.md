@@ -29,4 +29,7 @@ see if speed or memory allocation can be improved, write some tests,
 and make the code shorter in a few places, especially in the SingleRoverInstruction()method.
 I wasn't sure if they program should run for two rovers evereytime but I like to offer the user to chose how many rovers she/he'd like to deploy.
 
+How to run
+
+This is a console Application. Navigate inot the Mars Rover file in a command prompt windw and run 'dotnet run' to start the program.
 
