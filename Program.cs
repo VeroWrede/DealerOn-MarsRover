@@ -12,15 +12,10 @@ namespace Mars_Rover
             //get grid size, must be in main if all rovers are to deploy in the same grid
             Console.WriteLine("Enter Grid bounds:");
             var gridInput = Console.ReadLine();
-            bool validInput = CheckGridInput(gridInput);
-            if (!validInput)
+            List<int> gridCoordinates = CheckGridInput(gridInput);
+            if (gridCoordinates[0] == -1)
             {
                 return;
-            }
-            List<int> gridCoordinates = new List<int>();
-            foreach(string coordinate in gridInput.Trim().Split(' '))
-            {
-                gridCoordinates.Add(int.Parse(coordinate));
             }
 
             // this is optional
@@ -229,28 +224,30 @@ namespace Mars_Rover
             return true;
         }
 
-        static bool CheckGridInput(string gridInput)
+        static List<int> CheckGridInput(string gridInput)
         {
             int inputCount = 0;
+            List<int> gridCoordinatesNew = new List<int>();
+            List<int> badInput = new List<int>() {-1};
             foreach (string bound in gridInput.Trim().Split(' '))
             {
                 try
                 {
-                    int.Parse(bound);
+                    gridCoordinatesNew.Add(int.Parse(bound));
                     inputCount ++;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine($"input {bound} is not a number. \nTry again");
-                    return false;
+                    return badInput;
                 }
             }
             if (inputCount != 2)
             {
                 Console.WriteLine("Please enter two Coordinates \nTry again");
-                return false;
+                return badInput;
             }
-            return true;
+            return gridCoordinatesNew;
         }
     }
 }
