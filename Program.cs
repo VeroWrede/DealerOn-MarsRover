@@ -11,14 +11,14 @@ namespace Mars_Rover
             Console.WriteLine("Welcome on Mars!");
             //get grid size, must be in main if all rovers are to deploy in the same grid
             Console.WriteLine("Enter Grid bounds:");
-            var userInput = Console.ReadLine();
-            bool validInput = CheckUserInput(userInput);
+            var gridInput = Console.ReadLine();
+            bool validInput = CheckGridInput(gridInput);
             if (!validInput)
             {
                 return;
             }
             List<int> gridCoordinates = new List<int>();
-            foreach(string coordinate in userInput.Trim().Split(' '))
+            foreach(string coordinate in gridInput.Trim().Split(' '))
             {
                 gridCoordinates.Add(int.Parse(coordinate));
             }
@@ -27,7 +27,7 @@ namespace Mars_Rover
             int numOfRovers = RoverNumber();
             for (int i = 0; i < numOfRovers; i++)
             {
-                SingleRoverInstruction(gridCoordinates, userInput);
+                SingleRoverInstruction(gridCoordinates, gridInput);
             }
 
         }
@@ -48,7 +48,7 @@ namespace Mars_Rover
             return int.Parse(rovers);
         }
 
-        static void SingleRoverInstruction(List<int> gridCoordinates, string userInput)
+        static void SingleRoverInstruction(List<int> gridCoordinates, string gridInput)
         {
             
             
@@ -229,10 +229,10 @@ namespace Mars_Rover
             return true;
         }
 
-        static bool CheckUserInput(string userInput)
+        static bool CheckGridInput(string gridInput)
         {
             int inputCount = 0;
-            foreach (string bound in userInput.Trim().Split(' '))
+            foreach (string bound in gridInput.Trim().Split(' '))
             {
                 try
                 {
