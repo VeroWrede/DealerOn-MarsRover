@@ -99,7 +99,7 @@ namespace Mars_Rover
                     //rover looks north (up)
                     if((startingCoordinates.orientation) == "N")
                     {
-                        roverPosition[1] = roverPosition[1] + 1;
+                        roverPosition[1] += 1;
                         if(roverPosition[1] > gridCoordinates[1])
                         {
                             Console.WriteLine("Rover left surveilance grid.");
@@ -108,7 +108,7 @@ namespace Mars_Rover
                     }
                     else if ((startingCoordinates.orientation) == "S")
                     {
-                        roverPosition[1] = roverPosition[1] - 1;
+                        roverPosition[1] -= 1;
                         if (roverPosition[1] < 0)
                         {
                             Console.WriteLine("rover left surveilance grid.");
@@ -117,7 +117,7 @@ namespace Mars_Rover
                     }
                     else if ((startingCoordinates.orientation) == "E")
                     {
-                        roverPosition[0] = roverPosition[0] + 1;
+                        roverPosition[0] += 1;
                         if(roverPosition[0] > gridCoordinates[0])
                         {
                             Console.WriteLine("Rover left surveilance grid.");
@@ -126,7 +126,7 @@ namespace Mars_Rover
                     }
                     else if ((startingCoordinates.orientation) == "W")
                     {
-                        roverPosition[0] = roverPosition[0] - 1;
+                        roverPosition[0] -= 1;
                         if (roverPosition[0] < 0)
                         {
                             Console.WriteLine("rover left surveilance grid.");
