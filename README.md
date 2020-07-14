@@ -20,11 +20,16 @@ Your task is write an application that takes the test input (instructions from N
 output (the feedback from the rovers to NASA). Each rover will move in series, i.e. the next rover will not start
 moving until the one preceding it finishes.
 
+Plan for today: 
+
+Improve the way to set Starting coordinates as a touple instead of a list
+see if i can improve the way commands get executed by the rover
+look into writing (unit) tests (previous experience is mainly in python so I'll need to research this a little)
 
 Design Explanantion 
 
 Main focus was on verifying if the user input is correct. 
-Idealy, with more time I'd like to put all helper methods in a different file and only have Main() in Program.cs,
+I'd like to put all helper methods in a different file and only have Main() in Program.cs,
 see if speed or memory allocation can be improved, write some tests,
 and make the code shorter in a few places, especially in the SingleRoverInstruction()method.
 I wasn't sure if they program should run for two rovers evereytime but I like to offer the user to chose how many rovers she/he'd like to deploy.

@@ -17,7 +17,6 @@ namespace Mars_Rover
             {
                 return;
             }
-
             // this is optional
             int numOfRovers = RoverNumber();
             for (int i = 0; i < numOfRovers; i++)
@@ -25,6 +24,11 @@ namespace Mars_Rover
                 SingleRoverInstruction(gridCoordinates, gridInput);
             }
 
+        }
+
+        static (int x, int y, string orientation) SetStartingCoordinates(string startingPoint)
+        {
+            return (1, 2, "n");
         }
 
         static int RoverNumber()
@@ -50,6 +54,7 @@ namespace Mars_Rover
             // get rover starting point
             Console.WriteLine("Please enter the rovers starting point:");
             var startingPoint = Console.ReadLine();
+            (int xCoordinate, int yCoordinate, string orientation) startingCoordinatesTouple = SetStartingCoordinates(startingPoint);
             List<string> startingCoordinates = new List<string>();
             foreach(string coordinate in startingPoint.Trim().Split(' '))
             {
@@ -192,7 +197,7 @@ namespace Mars_Rover
             // only three commands
             if (startingCoordinates.Count != 3)
             {
-                Console.WriteLine("Enter three starting point coordinates. Try again.");
+                Console.WriteLine("Must enter three starting point coordinates.");
                 return false;
             }
             startingCoordinates[2] = startingCoordinates[2].ToUpper();
