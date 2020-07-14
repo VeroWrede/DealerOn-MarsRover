@@ -8,20 +8,21 @@ namespace Mars_Rover
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome on Mars!");
+            Console.WriteLine("Welcome on Mars! \n 3 3 n");
             //get grid size, must be in main if all rovers are to deploy in the same grid
-            Console.WriteLine("Enter Grid bounds:");
+            //Console.WriteLine("Enter Grid bounds:");
             var gridInput = Console.ReadLine();
-            List<int> gridCoordinates = CheckGridInput(gridInput);
+            //List<int> gridCoordinates = CheckGridInput(gridInput);
+            List<int> gridCoordinates =  new List<int>() {9, 9};
             if (gridCoordinates[0] == -1)
             {
                 return;
             }
             // this is optional
-            int numOfRovers = RoverNumber();
-            for (int i = 0; i < numOfRovers; i++)
+            //int numOfRovers = RoverNumber();
+            for (int i = 0; i < 1; i++)
             {
-                SingleRoverInstruction(gridCoordinates, gridInput);
+                SingleRoverInstruction(gridCoordinates);
             }
 
         }
@@ -58,14 +59,14 @@ namespace Mars_Rover
             return int.Parse(rovers);
         }
 
-        static void SingleRoverInstruction(List<int> gridCoordinates, string gridInput)
+        static void SingleRoverInstruction(List<int> gridCoordinates)
         {
             
             
             // get rover starting point
-            Console.WriteLine("Please enter the rovers starting point:");
-            var startingPoint = Console.ReadLine();
-
+            //Console.WriteLine("Please enter the rovers starting point:");
+            //var startingPoint = Console.ReadLine();
+            var startingPoint = "3 3 n";
             (int xCoordinate, int yCoordinate, string orientation) startingCoordinates = SetStartingCoordinates(startingPoint, gridCoordinates);
             if(startingCoordinates.orientation == null)
             {
@@ -86,6 +87,10 @@ namespace Mars_Rover
             List<int> roverPosition = new List<int>() {startingCoordinates.xCoordinate, startingCoordinates.yCoordinate};
 
             // instructions already set as var/string instructionInput
+
+            // start with "W" so that modulo results match indexes
+            List<string> cardinals = new List<string>(){"W","N", "E", "S"};
+            int tracker = cardinals.IndexOf(startingCoordinates.orientation);
 
             // moving rover
             for (int i = 0; i < instructionInput.Length; i++)
@@ -131,50 +136,24 @@ namespace Mars_Rover
                         }
                     }
                 }
+                
                 // intruction to turn right
                 if (Char.ToString(instructionInput[i]) == "R")
                 {
-                    if ((startingCoordinates.orientation) == "N")
-                    {
-                        startingCoordinates.orientation = "E";
-                    }
-                    else if ((startingCoordinates.orientation) == "E")
-                    {
-                        startingCoordinates.orientation = "S";
-                    }
-                    else if ((startingCoordinates.orientation) == "S")
-                    {
-                        startingCoordinates.orientation = "W";
-                    }
-                    else if ((startingCoordinates.orientation) == "W")
-                    {
-                        startingCoordinates.orientation = "N";
-                    }
+                    tracker += 1;
                 }
                 // instruction to turn left
                 if (Char.ToString(instructionInput[i]) == "L")
                 {
-                    if ((startingCoordinates.orientation) == "N")
-                    {
-                        startingCoordinates.orientation = "W";
-                    }
-                    else if ((startingCoordinates.orientation) == "E")
-                    {
-                        startingCoordinates.orientation = "N";
-                    }
-                    else if ((startingCoordinates.orientation) == "S")
-                    {
-                        startingCoordinates.orientation = "E";
-                    }
-                    else if ((startingCoordinates.orientation) == "W")
-                    {
-                        startingCoordinates.orientation = "S";
-                    }
+                    tracker -= 1;
+                }
+                if (tracker <= 0)
+                {
+                    tracker += 4;
                 }
             }
-            
-            Console.WriteLine($"{roverPosition[0]} {roverPosition[1]} {startingCoordinates.orientation}");
-
+            tracker = (tracker%4);
+            startingCoordinates.orientation = cardinals[tracker];
         }
 
         static bool CheckInstructions(string instructionsInput)
