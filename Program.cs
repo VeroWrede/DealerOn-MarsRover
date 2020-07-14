@@ -26,9 +26,20 @@ namespace Mars_Rover
 
         }
 
-        static (int x, int y, string orientation) SetStartingCoordinates(string startingPoint)
+        static (int x, int y, string orientation) SetStartingCoordinates(string startingPoint, List<int> gridCoordinates)
         {
-            return (1, 2, "n");
+            bool validCoordinates = CheckStartingPoint(startingPoint, gridCoordinates);
+
+            if (validCoordinates)
+            {
+                var xCoordinate = startingPoint.Trim().Split(' ')[0];
+                var yCoordinate = startingPoint.Trim().Split(' ')[1];
+                var orientation = startingPoint.Trim().Split(' ')[2].ToUpper();
+
+                return (int.Parse(xCoordinate), int.Parse(yCoordinate), orientation);
+            }
+            return (-1, -1, null);
+
         }
 
         static int RoverNumber()
@@ -54,14 +65,9 @@ namespace Mars_Rover
             // get rover starting point
             Console.WriteLine("Please enter the rovers starting point:");
             var startingPoint = Console.ReadLine();
-            (int xCoordinate, int yCoordinate, string orientation) startingCoordinatesTouple = SetStartingCoordinates(startingPoint);
-            List<string> startingCoordinates = new List<string>();
-            foreach(string coordinate in startingPoint.Trim().Split(' '))
-            {
-                startingCoordinates.Add(coordinate);
-            }
-            bool validStartingPoint = CheckStartingPoint(startingCoordinates, gridCoordinates);
-            if(!validStartingPoint)
+
+            (int xCoordinate, int yCoordinate, string orientation) startingCoordinates = SetStartingCoordinates(startingPoint, gridCoordinates);
+            if(startingCoordinates.orientation == null)
             {
                 return;
             }
@@ -77,7 +83,7 @@ namespace Mars_Rover
             
             // starting point already set as List<string> startingCoordinates
 
-            List<int> roverPosition = new List<int>() {int.Parse(startingCoordinates[0]), int.Parse(startingCoordinates[1])};
+            List<int> roverPosition = new List<int>() {startingCoordinates.xCoordinate, startingCoordinates.yCoordinate};
 
             // instructions already set as var/string instructionInput
 
@@ -88,7 +94,7 @@ namespace Mars_Rover
                 if(Char.ToString(instructionInput[i]) == "M")
                 {
                     //rover looks north (up)
-                    if((startingCoordinates[2]) == "N")
+                    if((startingCoordinates.orientation) == "N")
                     {
                         roverPosition[1] = roverPosition[1] + 1;
                         if(roverPosition[1] > gridCoordinates[1])
@@ -97,7 +103,7 @@ namespace Mars_Rover
                             return;
                         }
                     }
-                    else if ((startingCoordinates[2]) == "S")
+                    else if ((startingCoordinates.orientation) == "S")
                     {
                         roverPosition[1] = roverPosition[1] - 1;
                         if (roverPosition[1] < 0)
@@ -106,7 +112,7 @@ namespace Mars_Rover
                             return;
                         }
                     }
-                    else if ((startingCoordinates[2]) == "E")
+                    else if ((startingCoordinates.orientation) == "E")
                     {
                         roverPosition[0] = roverPosition[0] + 1;
                         if(roverPosition[0] > gridCoordinates[0])
@@ -115,7 +121,7 @@ namespace Mars_Rover
                             return;
                         }
                     }
-                    else if ((startingCoordinates[2]) == "W")
+                    else if ((startingCoordinates.orientation) == "W")
                     {
                         roverPosition[0] = roverPosition[0] - 1;
                         if (roverPosition[0] < 0)
@@ -128,50 +134,46 @@ namespace Mars_Rover
                 // intruction to turn right
                 if (Char.ToString(instructionInput[i]) == "R")
                 {
-                    if ((startingCoordinates[2]) == "N")
+                    if ((startingCoordinates.orientation) == "N")
                     {
-                        startingCoordinates[2] = "E";
+                        startingCoordinates.orientation = "E";
                     }
-                    else if ((startingCoordinates[2]) == "E")
+                    else if ((startingCoordinates.orientation) == "E")
                     {
-                        startingCoordinates[2] = "S";
+                        startingCoordinates.orientation = "S";
                     }
-                    else if ((startingCoordinates[2]) == "S")
+                    else if ((startingCoordinates.orientation) == "S")
                     {
-                        startingCoordinates[2] = "W";
+                        startingCoordinates.orientation = "W";
                     }
-                    else if ((startingCoordinates[2]) == "W")
+                    else if ((startingCoordinates.orientation) == "W")
                     {
-                        startingCoordinates[2] = "N";
+                        startingCoordinates.orientation = "N";
                     }
                 }
                 // instruction to turn left
                 if (Char.ToString(instructionInput[i]) == "L")
                 {
-                    if ((startingCoordinates[2]) == "N")
+                    if ((startingCoordinates.orientation) == "N")
                     {
-                        startingCoordinates[2] = "W";
+                        startingCoordinates.orientation = "W";
                     }
-                    else if ((startingCoordinates[2]) == "E")
+                    else if ((startingCoordinates.orientation) == "E")
                     {
-                        startingCoordinates[2] = "N";
+                        startingCoordinates.orientation = "N";
                     }
-                    else if ((startingCoordinates[2]) == "S")
+                    else if ((startingCoordinates.orientation) == "S")
                     {
-                        startingCoordinates[2] = "E";
+                        startingCoordinates.orientation = "E";
                     }
-                    else if ((startingCoordinates[2]) == "W")
+                    else if ((startingCoordinates.orientation) == "W")
                     {
-                        startingCoordinates[2] = "S";
+                        startingCoordinates.orientation = "S";
                     }
                 }
             }
             
-            /*Console.WriteLine($"rover position x: {roverPosition[0]}");
-            Console.WriteLine($"rover position y: {roverPosition[1]}");
-            Console.WriteLine($"rover orientation: {startingCoordinates[2]}");
-            */
-            Console.WriteLine($"{roverPosition[0]} {roverPosition[1]} {startingCoordinates[2]}");
+            Console.WriteLine($"{roverPosition[0]} {roverPosition[1]} {startingCoordinates.orientation}");
 
         }
 
@@ -192,21 +194,21 @@ namespace Mars_Rover
 
         }
 
-        static bool CheckStartingPoint(List<string> startingCoordinates, List<int> gridCoordinates)
+        static bool CheckStartingPoint(string startingPoint, List<int> gridCoordinates)
         {
+            var coordinatesArr = (startingPoint.Trim().Split(' '));
             // only three commands
-            if (startingCoordinates.Count != 3)
+            if (coordinatesArr.Length != 3)
             {
                 Console.WriteLine("Must enter three starting point coordinates.");
                 return false;
             }
-            startingCoordinates[2] = startingCoordinates[2].ToUpper();
             // item 1 and 2 in startingCoordinates must be grid coordinates within the given grid
             for (int i = 0; i < 2; i++)
             {
                 try
                 {
-                    int coordinate = int.Parse(startingCoordinates[i]);
+                    int coordinate = int.Parse(coordinatesArr[i]);
                     if (coordinate < 0 || coordinate > gridCoordinates[i])
                     {
                         Console.WriteLine("Rover not in Grid.");
@@ -221,9 +223,9 @@ namespace Mars_Rover
             }
             List<string> cardinals = new List<string>(){"N", "S", "E", "W"};
             // third grid coordinate must be valid cardinal 
-            if(!cardinals.Contains(startingCoordinates[2]))
+            if(!cardinals.Contains(coordinatesArr[2].ToUpper()))
             {
-                Console.WriteLine("Wrong direction of rover");
+                Console.WriteLine("Invalid orientation.");
                 return false;
             }
             return true;
