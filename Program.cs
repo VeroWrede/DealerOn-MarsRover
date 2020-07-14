@@ -8,19 +8,18 @@ namespace Mars_Rover
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome on Mars! \n 3 3 n");
+            Console.WriteLine("Welcome on Mars!");
             //get grid size, must be in main if all rovers are to deploy in the same grid
-            //Console.WriteLine("Enter Grid bounds:");
+            Console.WriteLine("Enter Grid bounds:");
             var gridInput = Console.ReadLine();
-            //List<int> gridCoordinates = CheckGridInput(gridInput);
-            List<int> gridCoordinates =  new List<int>() {9, 9};
+            List<int> gridCoordinates = CheckGridInput(gridInput);
             if (gridCoordinates[0] == -1)
             {
                 return;
             }
             // this is optional
-            //int numOfRovers = RoverNumber();
-            for (int i = 0; i < 1; i++)
+            int numOfRovers = RoverNumber();
+            for (int i = 0; i < numOfRovers; i++)
             {
                 SingleRoverInstruction(gridCoordinates);
             }
@@ -64,9 +63,8 @@ namespace Mars_Rover
             
             
             // get rover starting point
-            //Console.WriteLine("Please enter the rovers starting point:");
-            //var startingPoint = Console.ReadLine();
-            var startingPoint = "3 3 n";
+            Console.WriteLine("Please enter the rovers starting point:");
+            var startingPoint = Console.ReadLine();
             (int xCoordinate, int yCoordinate, string orientation) startingCoordinates = SetStartingCoordinates(startingPoint, gridCoordinates);
             if(startingCoordinates.orientation == null)
             {
@@ -154,6 +152,7 @@ namespace Mars_Rover
             }
             tracker = (tracker%4);
             startingCoordinates.orientation = cardinals[tracker];
+            Console.WriteLine($"{roverPosition[0]} {roverPosition[1]} {startingCoordinates.orientation}");
         }
 
         static bool CheckInstructions(string instructionsInput)
