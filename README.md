@@ -22,8 +22,6 @@ moving until the one preceding it finishes.
 
 Plan for today: 
 
-Improve the way to set Starting coordinates as a touple instead of a list - done
-see if i can improve the way commands get executed by the rover
 look into writing (unit) tests (previous experience is mainly in python so I'll need to research this a little)
 
 Design Explanantion 
