@@ -60,6 +60,8 @@ namespace Mars_Rover
 
         static void SingleRoverInstruction(List<int> gridCoordinates)
         {
+            
+            
             // get rover starting point
             Console.WriteLine("Please enter the rovers starting point:");
             var startingPoint = Console.ReadLine();
@@ -78,7 +80,11 @@ namespace Mars_Rover
                 return;
             }
             
+            // starting point already set as List<string> startingCoordinates
+
             List<int> roverPosition = new List<int>() {startingCoordinates.xCoordinate, startingCoordinates.yCoordinate};
+
+            // instructions already set as var/string instructionInput
 
             // start with "W" so that modulo results match indexes
             List<string> cardinals = new List<string>(){"W","N", "E", "S"};
@@ -105,7 +111,7 @@ namespace Mars_Rover
                         roverPosition[1] -= 1;
                         if (roverPosition[1] < 0)
                         {
-                            Console.WriteLine("Rover left surveilance grid.");
+                            Console.WriteLine("rover left surveilance grid.");
                             return;
                         }
                     }
