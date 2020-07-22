@@ -9,3 +9,10 @@ C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.A
 C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.AssemblyInfo.cs
 C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.dll
 C:\Users\VWrede\Desktop\DealerOn\Mars Rover\obj\Debug\netcoreapp2.1\Mars Rover.pdb
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\testhost.exe
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\testhost.dll
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\nunit.engine.dll
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\nunit.engine.api.dll
+C:\Users\VWrede\Desktop\DealerOn\Mars Rover\bin\Debug\netcoreapp2.1\nunit.engine.core.dll
