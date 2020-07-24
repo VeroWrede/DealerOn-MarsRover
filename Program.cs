@@ -8,22 +8,40 @@ namespace Mars_Rover
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome on Mars!");
-            //get grid size, must be in main if all rovers are to deploy in the same grid
-            Console.WriteLine("Enter Grid bounds:");
+            Console.WriteLine("Welcome to Mars!\n");
+            Console.WriteLine("Please enter two numbers separated by a space as Grid bounds (Example: 8 5).\n");
             var gridInput = Console.ReadLine();
-            List<int> gridCoordinates = CheckGridInput(gridInput);
-            if (gridCoordinates[0] == -1)
+            bool run = true;
+            try 
             {
-                return;
+                (int x, int y) gridCoordinates = ParseGridInput(gridInput);
             }
-            // this is optional
-            int numOfRovers = RoverNumber();
-            for (int i = 0; i < numOfRovers; i++)
+            catch (Exception e)
             {
-                SingleRoverInstruction(gridCoordinates);
+                Console.WriteLine("There was a problem with your input, please try again!");
             }
+            while (run)
+            {
+                Console.WriteLine("Do you want to deploy a rover? (y/n) \n");
+                string repeat = Console.ReadLine();
+                run = ParseRepeat(repeat);
+            }
+            // int numOfRovers = RoverNumber();
+            // for (int i = 0; i < numOfRovers; i++)
+            // {
+            //     SingleRoverInstruction(gridCoordinates);
+            // }
+        }
 
+        static bool ParseRepeat(string repetition)
+        {
+            if (repetition.ToUpper().Trim() != "Y")
+            {
+                Console.WriteLine("Thank you for using this application! Good bye.");
+                return false;
+            }
+            Console.WriteLine("You chose to deploy another rover.\n");
+            return true;
         }
 
         static (int x, int y, string orientation) SetStartingCoordinates(string startingPoint, List<int> gridCoordinates)
@@ -39,31 +57,13 @@ namespace Mars_Rover
                 return (int.Parse(xCoordinate), int.Parse(yCoordinate), orientation);
             }
             return (-1, -1, null);
-
         }
 
-        static int RoverNumber()
-        {
-            Console.WriteLine("How many rovers would you like to deploy?");
-            var rovers = Console.ReadLine();
-            try
-            {
-               int.Parse(rovers);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Please enter a numeric value.");
-                return 0;
-            }
-            return int.Parse(rovers);
-        }
 
         static void SingleRoverInstruction(List<int> gridCoordinates)
         {
-            
-            
             // get rover starting point
-            Console.WriteLine("Please enter the rovers starting point:");
+            Console.WriteLine("Please enter the rover's starting point in the grid and the direction it should face all separated by one space (Example: 2 4 N ).");
             var startingPoint = Console.ReadLine();
             (int xCoordinate, int yCoordinate, string orientation) startingCoordinates = SetStartingCoordinates(startingPoint, gridCoordinates);
             if(startingCoordinates.orientation == null)
@@ -72,7 +72,7 @@ namespace Mars_Rover
             }
 
             // get turning instructions
-            Console.WriteLine("Please enter movement instructions:");
+            Console.WriteLine("Please enter movement instructions as a single continuous string. You can chose L (turn left), R (turn right), or M (move one step forward).");
             var instructionInput = Console.ReadLine().ToUpper();
             bool validInstructions = CheckInstructions(instructionInput);
             if (!validInstructions)
@@ -168,8 +168,6 @@ namespace Mars_Rover
                 }
             }
             return true;
-
-
         }
 
         static bool CheckStartingPoint(string startingPoint, List<int> gridCoordinates)
@@ -209,30 +207,32 @@ namespace Mars_Rover
             return true;
         }
 
-        static List<int> CheckGridInput(string gridInput)
+        static (int x, int y) ParseGridInput(string gridInput)
         {
-            int inputCount = 0;
-            List<int> gridCoordinatesNew = new List<int>();
-            List<int> badInput = new List<int>() {-1};
+            var xValue = gridInput.Trim().Split(' ')[0];
+            int parsedX = 0;
+            var yValue = gridInput.Trim().Split(' ')[1];
+            int parsedY = 0;
             foreach (string bound in gridInput.Trim().Split(' '))
             {
                 try
                 {
-                    gridCoordinatesNew.Add(int.Parse(bound));
-                    inputCount ++;
+                    parsedX = int.Parse(xValue);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"input {bound} is not a number. \nTry again");
-                    return badInput;
+                    throw new ArgumentException("You entered an invalid Y Value.");
+                }
+                try
+                {
+                    parsedY = int.Parse(yValue);
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("You entered an invalid Y Value.");
                 }
             }
-            if (inputCount != 2)
-            {
-                Console.WriteLine("Please enter two Coordinates \nTry again");
-                return badInput;
-            }
-            return gridCoordinatesNew;
+            return (parsedX, parsedY);
         }
     }
 }

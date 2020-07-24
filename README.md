@@ -20,9 +20,9 @@ Your task is write an application that takes the test input (instructions from N
 output (the feedback from the rovers to NASA). Each rover will move in series, i.e. the next rover will not start
 moving until the one preceding it finishes.
 
-Plan for today: 
-
-look into writing (unit) tests (previous experience is mainly in python so I'll need to research this a little)
+To Do: 
+Specify user input upfront.
+Will put test in a different file since that's the conventioanl way to structure projects.
 
 Design Explanantion 
 
