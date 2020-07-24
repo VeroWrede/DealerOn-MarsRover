@@ -53,7 +53,7 @@ namespace Mars_Rover
             }
         }
 
-        static bool ParseRepeat(string repetition)
+        public bool ParseRepeat(string repetition)
         {
             if (repetition.ToUpper().Trim() != "Y")
             {
