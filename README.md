@@ -20,17 +20,12 @@ Your task is write an application that takes the test input (instructions from N
 output (the feedback from the rovers to NASA). Each rover will move in series, i.e. the next rover will not start
 moving until the one preceding it finishes.
 
-To Do: 
-Specify user input upfront.
-Will put test in a different file since that's the conventioanl way to structure projects.
-
 Design Explanantion 
 
-Main focus was on verifying if the user input is correct. 
-I'd like to put all helper methods in a different file and only have Main() in Program.cs,
-see if speed or memory allocation can be improved, write some tests,
-and make the code shorter in a few places, especially in the SingleRoverInstruction()method.
-I wasn't sure if they program should run for two rovers evereytime but I like to offer the user to chose how many rovers she/he'd like to deploy.
+I tried to imporve the provious desin and add test. I think it might be nice to change the modulo to enum and change the coordinate instructions to enum with switch statements.
+I've not tested much in C# and never set it up in VSC so it took me a bit to figure that out and I ran out of time.
+Another idea would be to turn my methods into custom exception classes that I could us in a try-cathc block. I also thing there is a better way of doing CheckStartingPoint() and ParseStartingPoint().
+
 
 How to run
 

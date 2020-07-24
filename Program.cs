@@ -53,7 +53,7 @@ namespace Mars_Rover
             }
         }
 
-        static bool ParseRepeat(string repetition)
+        public static bool ParseRepeat(string repetition)
         {
             if (repetition.ToUpper().Trim() != "Y")
             {
@@ -145,7 +145,7 @@ namespace Mars_Rover
             Console.WriteLine($"{roverCoordinates.x} {roverCoordinates.y} {roverCoordinates.orientation}");
         }
 
-        static bool CheckInstructions(string instructionsInput)
+        public static bool CheckInstructions(string instructionsInput)
         {
             List<string> instructionOptions = new List<string>() {"L", "R", "M"};
             for (int i = 0; i < instructionsInput.Length; i++)
@@ -209,7 +209,7 @@ namespace Mars_Rover
             return true;
         }
 
-        static (int x, int y) ParseGridInput(string gridInput)
+        public static (int x, int y) ParseGridInput(string gridInput)
         {
             var xValue = gridInput.Trim().Split(' ')[0];
             int parsedX = 0;
