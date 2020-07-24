@@ -30,13 +30,5 @@ namespace Mars_Rover.UnitTests
             Assert.IsTrue(testEmpty);
         }
 
-        [Test]
-        public void TestParseGridInput()
-        {
-            var gridOk = Program.ParseGridInput("3 5");
-            var gridBad = Program.ParseGridInput("hello");
-            
-            
-        }
     }
 }
