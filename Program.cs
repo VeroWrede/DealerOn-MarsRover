@@ -13,7 +13,7 @@ namespace Mars_Rover
             (int x, int y)? gridCoordinates = null;
             while (!correctGridInput)
             {
-                Console.WriteLine("Please enter two numbers separated by a space as Grid bounds (Example: 8 5).\n");
+                Console.WriteLine("Please enter two numbers separated by a space as Grid bounds (Example: 8 5).");
                 var gridInput = Console.ReadLine();
                 try
                 {
@@ -29,30 +29,27 @@ namespace Mars_Rover
             
             while (run)
             {
-                Console.WriteLine("Do you want to deploy a rover? (y/n) \n");
-                string repeat = Console.ReadLine();
-                run = ParseRepeat(repeat);
-
                 Console.WriteLine("Please enter the rover's starting point in the grid and the direction it should face all separated by one space (Example: 2 4 N ).");
                 var startingPoint = Console.ReadLine();
                 bool validCoordinates = CheckStartingPoint(startingPoint, gridCoordinates.Value);
+                
                 if (validCoordinates)
                 {
                     (int xCoordinate, int yCoordinate, string orientation) startingCoordinates = ParseStartingCoordinates(startingPoint, gridCoordinates.Value);
 
                     Console.WriteLine("Please enter movement instructions as a single continuous string. You can chose L (turn left), R (turn right), or M (move one step forward).");
                     var instructionInput = Console.ReadLine().ToUpper();
-                    try
+                    
+                    bool validInstructions = CheckInstructions(instructionInput);
+                    if (validInstructions)
                     {
-                        bool validInstructions = CheckInstructions(instructionInput);
+                        ProcessRoverInstruction(gridCoordinates.Value , startingCoordinates, instructionInput);
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("There was a problem with your input. Please try again!");
-                    }
-
-                    ProcessRoverInstruction(gridCoordinates.Value , startingCoordinates, instructionInput);
                 }
+                
+                Console.WriteLine("Do you want to deploy another rover? (y/n) ");
+                string repeat = Console.ReadLine();
+                run = ParseRepeat(repeat);
             }
         }
 
@@ -63,7 +60,6 @@ namespace Mars_Rover
                 Console.WriteLine("Thank you for using this application! Good bye.");
                 return false;
             }
-            Console.WriteLine("You chose to deploy another rover.\n");
             return true;
         }
 
@@ -154,8 +150,11 @@ namespace Mars_Rover
             List<string> instructionOptions = new List<string>() {"L", "R", "M"};
             for (int i = 0; i < instructionsInput.Length; i++)
             {
-                if (!instructionOptions.Contains(Char.ToString(instructionsInput[i])))
+                var currentChar = Char.ToString(instructionsInput[i]);
+                
+                if (!instructionOptions.Contains(currentChar))
                 {
+                    Console.WriteLine($"Instruction {currentChar} is invalid. Rover deployment aborted.");
                     return false;
                 }
             }
@@ -168,32 +167,43 @@ namespace Mars_Rover
             // only three commands
             if (coordinatesArr.Length != 3)
             {
-                Console.WriteLine("Must enter three starting point coordinates.");
+                Console.WriteLine("You must enter three starting point coordinates. Please try again!");
                 return false;
             }
             // item 1 and 2 in startingCoordinates must be grid coordinates within the given grid
-            for (int i = 0; i < 2; i++)
+            try
             {
-                try
+                int coordinate = int.Parse(coordinatesArr[0]);
+                if (coordinate < 0 || coordinate > gridCoordinates.x)
                 {
-                    int coordinate = int.Parse(coordinatesArr[i]);
-                    if (coordinate < 0 || coordinate > gridCoordinates[i])
-                    {
-                        Console.WriteLine("Rover not in Grid.");
-                        return false;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("starting coordinates out of bounds");
+                    Console.WriteLine("Rover's X coordinate is not within the Grid.");
                     return false;
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("starting coordinates out of bounds");
+                return false;
+            }
+            try
+            {
+                int coordinate = int.Parse(coordinatesArr[1]);
+                if (coordinate < 0 || coordinate > gridCoordinates.y)
+                {
+                    Console.WriteLine("Rover's Y coordinate is not within the Grid.");
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("starting coordinates out of bounds");
+                return false;
             }
             List<string> cardinals = new List<string>(){"N", "S", "E", "W"};
             // third grid coordinate must be valid cardinal 
             if(!cardinals.Contains(coordinatesArr[2].ToUpper()))
             {
-                Console.WriteLine("Invalid orientation.");
+                Console.WriteLine("Invalid orientation Input. Rover deployment aborted.");
                 return false;
             }
             return true;
