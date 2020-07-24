@@ -18,6 +18,25 @@ namespace Mars_Rover.UnitTests
             Assert.IsFalse(testEmpty);
         }
 
+        [Test]
+        public void TestCheckInstructions()
+        {
+            bool testOk = Program.CheckInstructions("LLMR");
+            bool testEmpty = Program.CheckInstructions("");
+            bool testBad = Program.CheckInstructions("xxx");
 
+            Assert.IsTrue(testOk);
+            Assert.IsFalse(testBad);
+            Assert.IsTrue(testEmpty);
+        }
+
+        [Test]
+        public void TestParseGridInput()
+        {
+            var gridOk = Program.ParseGridInput("3 5");
+            var gridBad = Program.ParseGridInput("hello");
+            
+            
+        }
     }
 }
